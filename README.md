@@ -13,15 +13,15 @@ You can also use ::: blocks:
 
 
 
-::: mermaid
+``` mermaid
     flowchart TD
         A-->B;
         A-->C;
         B-->D;
         C-->D;
-:::
+```
 
-::: mermaid
+``` mermaid
 ---
 title: My Database erDiagram
 ---
@@ -68,9 +68,9 @@ title: My Database erDiagram
         date updatedAt
     }
 
-:::
+```
 
-::: mermaid
+``` mermaid
     erDiagram
 
     Character {
@@ -89,9 +89,9 @@ title: My Database erDiagram
         date createdAt
         date updatedAt
     }
-:::
+```
 
-::: mermaid
+``` mermaid
     erDiagram
 
     Avatar {
@@ -108,14 +108,14 @@ title: My Database erDiagram
         date createdAt
         date updatedAt
     }
-:::
+```
 
 
 ---
  CLASS Diagram Example
 ---
 
-::: mermaid
+``` mermaid
     classDiagram
     note "From Duck till Zebra"
     Animal <|-- Duck
@@ -139,4 +139,4 @@ title: My Database erDiagram
         +bool is_wild
         +run()
     }
-:::
+```
