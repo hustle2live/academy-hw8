@@ -2,26 +2,7 @@
 BSA-2024 HomeWork-8
 
 ``` mermaid
-        graph LR;
-            A-->B;
-            A-->C;
-            B-->D;
-            C-->D;
-```
 
-You can also use ::: blocks:
-
-
-
-``` mermaid
-    flowchart TD
-        A-->B;
-        A-->C;
-        B-->D;
-        C-->D;
-```
-
-``` mermaid
 ---
 title: My Database erDiagram
 ---
@@ -34,26 +15,32 @@ title: My Database erDiagram
         varchar(15) secondName
         varchar(100) email
         varchar(15) password
-        text avatarId
+        uuid avatarId FK
+        uuid favourites FK
         date createdAt
         date updatedAt
     }
 
+    User |o--|| Avatar : Image
+    User ||--|{ FavouriteMovies : Array
+
     Movie {
         uuid id PK
-        text(100) title
+        varchar(100) title
         text(500) description
         money budget
         date releaseDate
         numeric duration
-        text country
+        varchar(100) country
         uuid posterId FK
         varchar(20) producer
-        uuid[] genres FK
+        varchar(150) genres
         uuid[] characters FK
         date createdAt
         date updatedAt
     }
+
+    Movie |o--|| Poster : id
 
     Person {
         uuid id PK
@@ -63,21 +50,28 @@ title: My Database erDiagram
         date birthDate
         varchar(15) gender
         varchar(25) birthCountry
-        text pictures
+        uuid[] gallery FK
         date createdAt
         date updatedAt
     }
 
-```
+    Person ||--|| Gallery : id
+    Person |o--|| Movie : movieId
+    Character }|--o| Movie : character
+    Character }|--o{ Person : data
 
-``` mermaid
-    erDiagram
+    Gallery {
+        uuid id PK
+        uuid personId FK
+        uuid[] filesId FK
+    }
 
     Character {
         uuid id PK
         varchar(20) name
         varchar(150) description
         uuid role FK
+        uuid[] films FK
         date createdAt
         date updatedAt
     }
@@ -86,57 +80,32 @@ title: My Database erDiagram
         uuid id PK
         uuid usersId FK
         uuid[] filmsList FK
-        date createdAt
-        date updatedAt
     }
-```
 
-``` mermaid
-    erDiagram
+    FavouriteMovies |o--|{ Movie : details
 
     Avatar {
         uuid id PK
-        string carRegistrationNumber
-        string driverLicence
-        date createdAt
-        date updatedAt
+        uuid[] fileId FK
     }
 
     Poster {
         uuid id PK
-        text imgPath
-        date createdAt
-        date updatedAt
+        uuid[] fileId FK
     }
+
+    File {
+        uuid id PK
+        varchar(50) filename
+        varchar(50) mimeType
+        varchar(50) key
+        varchar(150) publicURL
+    }
+
+    File }|--|{ Gallery : ImageData
+    File }|--|{ Poster : ImageData
+    File }|--|{ Avatar : ImageData
+
+
 ```
 
-
----
- CLASS Diagram Example
----
-
-``` mermaid
-    classDiagram
-    note "From Duck till Zebra"
-    Animal <|-- Duck
-    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-        +String beakColor
-        +swim()
-        +quack()
-    }
-    class Fish{
-        -int sizeInFeet
-        -canEat()
-    }
-    class Zebra{
-        +bool is_wild
-        +run()
-    }
-```
