@@ -21,8 +21,8 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    User |o--|| Avatar : Image
-    User ||--|{ FavouriteMovies : Array
+    User ||--o| Avatar : Image
+    User ||--o| FavouriteMovies : Array
 
     Movie {
         uuid id PK
@@ -40,7 +40,7 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    Movie |o--|| Poster : id
+    Movie ||--o| Poster : id
 
     Person {
         uuid id PK
@@ -55,9 +55,9 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    Person ||--|| Gallery : id
-    Person |o--|| Movie : movieId
-    Character }|--o| Movie : character
+    Person ||--o| Gallery : id
+    Person ||--|{ Movie : movieId
+    Character }|--|{ Movie : character
     Character }|--o{ Person : data
 
     Gallery {
@@ -82,11 +82,12 @@ title: My Database erDiagram
         uuid[] filmsList FK
     }
 
-    FavouriteMovies |o--|{ Movie : details
+    FavouriteMovies ||--o{ Movie : details
 
     Avatar {
         uuid id PK
         uuid[] fileId FK
+        uuid userId FK
     }
 
     Poster {
@@ -102,9 +103,9 @@ title: My Database erDiagram
         varchar(150) publicURL
     }
 
-    File }|--|{ Gallery : ImageData
-    File }|--|{ Poster : ImageData
-    File }|--|{ Avatar : ImageData
+    Gallery ||--o{ File : ImageData
+    Poster ||--o| File : ImageData
+    Avatar ||--o| File : ImageData
 
 
 ```
