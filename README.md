@@ -40,7 +40,7 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    Movie ||--o| Poster : id
+    Movie ||--o| Poster : poster
 
     Person {
         uuid id PK
@@ -55,8 +55,8 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    Person ||--o| Gallery : id
-    Person ||--|{ Movie : movieId
+    Person ||--o| Gallery : photos
+    Person }|--|{ Movie : movieId
     Character }|--|{ Movie : character
     Character }|--o{ Person : data
 
@@ -82,7 +82,7 @@ title: My Database erDiagram
         uuid[] filmsList FK
     }
 
-    FavouriteMovies ||--o{ Movie : details
+    FavouriteMovies ||--o{ Movie : setOfFilms
 
     Avatar {
         uuid id PK
