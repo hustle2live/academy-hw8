@@ -21,8 +21,8 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    User ||--o| Avatar : Image
-    User ||--o| FavouriteMovies : Array
+    User ||--o| Avatar : image
+    User ||--o| FavouriteMovies : array
 
     Movie {
         uuid id PK
@@ -70,8 +70,8 @@ title: My Database erDiagram
         uuid id PK
         varchar(20) name
         varchar(150) description
-        uuid role FK
-        uuid[] films FK
+        varchar(20) role FK
+        uuid[] movies FK
         date createdAt
         date updatedAt
     }
@@ -93,6 +93,7 @@ title: My Database erDiagram
     Poster {
         uuid id PK
         uuid[] fileId FK
+        uuid movieId FK
     }
 
     File {
@@ -103,9 +104,9 @@ title: My Database erDiagram
         varchar(150) publicURL
     }
 
-    Gallery ||--o{ File : ImageData
-    Poster ||--o| File : ImageData
-    Avatar ||--o| File : ImageData
+    Gallery ||--o{ File : imageData
+    Poster ||--o| File : imageData
+    Avatar ||--o| File : imageData
 
 
 ```
