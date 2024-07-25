@@ -10,11 +10,11 @@ title: My Database erDiagram
 
     User {
         uuid id PK
-        varchar(15) username
-        varchar(15) firstName
-        varchar(15) secondName
+        varchar(20) username
+        varchar(20) firstName
+        varchar(20) secondName
         varchar(100) email
-        varchar(15) password
+        varchar(20) password
         uuid avatarId FK
         uuid favourites FK
         date createdAt
@@ -33,7 +33,7 @@ title: My Database erDiagram
         numeric duration
         varchar(100) country
         uuid posterId FK
-        varchar(20) producer
+        varchar(50) producer
         varchar(150) genres
         uuid[] characters FK
         date createdAt
@@ -44,12 +44,12 @@ title: My Database erDiagram
 
     Person {
         uuid id PK
-        varchar(15) firstName
-        varchar(15) lastName
+        varchar(20) firstName
+        varchar(20) lastName
         text(700) biography
         date birthDate
-        varchar(15) gender
-        varchar(25) birthCountry
+        varchar(20) gender
+        varchar(50) birthCountry
         uuid[] gallery FK
         date createdAt
         date updatedAt
