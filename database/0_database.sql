@@ -1,3 +1,3 @@
 CREATE database movies;
 
--- \ connect movies;
+\connect movies;
