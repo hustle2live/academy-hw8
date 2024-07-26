@@ -1,6 +1,6 @@
 CREATE database movies;
 
-\connect movies;
+\ connect movies;
 
 CREATE TABLE "user" (
     id SERIAL PRIMARY KEY,
@@ -24,7 +24,8 @@ CREATE TABLE file (
 );
 
 CREATE TABLE countries (
-    code CHAR(2) PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY,
+    code NUMERIC NOT NULL,
     name VARCHAR(100) NOT NULL
 );
 
@@ -35,8 +36,8 @@ CREATE TABLE movie (
     budget MONEY,
     release_date DATE,
     duration NUMERIC,
-    country VARCHAR,
-    FOREIGN KEY (country) REFERENCES countries (code),
+    country_id INTEGER,
+    FOREIGN KEY (country_id) REFERENCES countries (id),
     poster_id INTEGER,
     FOREIGN KEY (poster_id) REFERENCES file (id),
     producer VARCHAR(50) NOT NULL,
@@ -45,17 +46,19 @@ CREATE TABLE movie (
     updated_at TIMESTAMP
 );
 
+CREATE TYPE genders AS ENUM ('male', 'female', 'nonbinary');
+
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
-    biography VARCHAR(700),
+    biography VARCHAR,
     birth_date DATE NOT NULL,
-    movie_id INTEGER,
-    FOREIGN KEY (movie_id) REFERENCES movie (id),
-    gender VARCHAR(20),
-    country VARCHAR,
-    FOREIGN KEY (country) REFERENCES countries (code),
+    gender genders,
+    country_id INTEGER,
+    FOREIGN KEY (country_id) REFERENCES countries (id),
+    picture INTEGER,
+    FOREIGN KEY (picture) REFERENCES file (id),
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
