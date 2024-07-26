@@ -2,6 +2,9 @@ const { Client } = require('pg');
 
 const data = require('./assets/country-code.json');
 
+// this function is to fill up table countries from data.json
+//  - to run this func type in: node ./countries.js
+
 try {
    const client = new Client({
       user: 'postgres',
@@ -28,7 +31,6 @@ try {
             console.log('Data inserted successfully');
          })
       );
-      //   client.end();
    }
 
    fillCountriesTable();
@@ -36,24 +38,11 @@ try {
    console.log(error);
 }
 
-const pasteMovie = `
-INSERT INTO movie (title,
-description,
-budget,
-release_date,
-duration,
-country_id,
-producer) VALUES ('Justice League: Crisis',
-'ne, these worlds and all their inhabitants a.',
-33201200,
-'1998-02-04 00:00:01.000000',
-141,
-1,
-'William Worth'
-);`;
+// below there are some templates for addition testing data to tables - by copy-paste manually
 
 const pastePerson = `
-INSERT INTO person (first_name, last_name, birth_date, country_id, gender) VALUES ('Harrie', 'Born', '1999-11-08', 1, 'male'),
+INSERT INTO person (first_name, last_name, birth_date, country_id, gender) VALUES
+ ('Harrie', 'Born', '1999-11-08', 1, 'male'),
  ('Martin', 'Luter', '1974-01-11', 1, 'male'),
  ('Barn', 'Lanier', '1963-11-08', 13, 'male'),
  ('Garry', 'Jherck', '1981-11-10', 13, 'male'),
@@ -63,12 +52,7 @@ INSERT INTO person (first_name, last_name, birth_date, country_id, gender) VALUE
 `;
 
 const pasteUser = `
-INSERT INTO "user" (
-first_name,
-second_name,
-email,
-password,
-username) VALUES (
+INSERT INTO "user" (first_name, second_name, email, password, username) VALUES (
 'Barret',
 'Trent',
 'bbfo@gmail.com',
