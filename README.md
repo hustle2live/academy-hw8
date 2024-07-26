@@ -40,7 +40,7 @@ title: My Database erDiagram
         date updatedAt
     }
 
-    Movie ||--o| Poster : poster
+    Movie ||--o| File : poster
 
     Person {
         uuid id PK
