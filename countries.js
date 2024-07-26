@@ -51,14 +51,6 @@ INSERT INTO person (first_name, last_name, birth_date, country_id, gender) VALUE
  ('Victor', 'Derek', '1954-01-10', 1, 'male');
 `;
 
-const pasteUser = `
-INSERT INTO "user" (first_name, second_name, email, password, username) VALUES (
-'Barret',
-'Trent',
-'bbfo@gmail.com',
-'fs&^56%9(fs',
-'beTrent');
-`;
 
 const characters = `
 INSERT INTO character (name, description, role, movie_id, person_id) VALUES 

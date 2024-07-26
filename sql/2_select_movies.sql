@@ -2,7 +2,7 @@
 -- Shape: -- ID -- Title -- Actors count
 
 
--- add some movies manually
+-- add a few movies manually
 
 INSERT INTO movie (title, description, budget, release_date, duration, country_id, producer) VALUES 
    ('Godzilla x Kong',  'Following their explosive showdown, Godzilla and Kong must reunite against a colossal undiscovered',
@@ -15,11 +15,19 @@ INSERT INTO movie (title, description, budget, release_date, duration, country_i
    33120200, '2016-02-10 00:00:01.000000', 141, 1, 'Marlon Baker');
 
 
+-- add some data to movie_actors table
+
+INSERT INTO movie_actors (movie_id, person_id) VALUES 
+    (7, 4), (7, 8), (7, 13), (7, 3), (7, 12), 
+    (9, 2), (9, 9), (9, 4), (9, 3), (9, 1), 
+    (8, 7), (8, 8), (8, 5), (8, 6), (8, 11);
+
 -- select shape data
 
 SELECT m.id, m.title, COUNT(ma.person_id) AS actors_count
 FROM movie m
 LEFT JOIN movie_actors ma ON ma.movie_id = m.id
+WHERE m.release_date >= '2019-01-01'
 GROUP BY m.id, m.title;
 
 
@@ -27,13 +35,6 @@ GROUP BY m.id, m.title;
 
 --  id |          title          | actors_count
 -- ----+-------------------------+--------------
---   4 | Wolverine               |            6
---  10 | Black Noise             |            0
---   6 | Justice League: Crisis  |            6
---   2 | Inside Out 2            |            6
---   7 | Godzilla x Kong         |            0
---   9 | Under Paris             |            0
---   3 | Despicable Me 4         |            6
---   1 | Bad Boys: Ride or Die   |            6
---   5 | The Garfield Movie      |            6
---   8 | My Spy The Eternal City |            0
+--   9 | Under Paris             |            5
+--   7 | Godzilla x Kong         |            5
+--   8 | My Spy The Eternal City |            5
