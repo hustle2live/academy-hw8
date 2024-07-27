@@ -1,6 +1,6 @@
 CREATE database movies;
 
-\ connect movies;
+\connect movies;
 
 CREATE TABLE "user" (
     id SERIAL PRIMARY KEY,

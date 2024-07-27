@@ -36,12 +36,13 @@ SELECT
             'url', ph.public_url
             )
         )
-    ) AS actors 
+    ) AS actors
     FROM movie_actors ma
     JOIN person a ON ma.person_id = a.id
     LEFT JOIN file ph ON a.picture = ph.id
     WHERE ma.movie_id = m.id
-    )) AS actors 
+    )) AS actors,
+    array_agg(json_build_object('name', m.genres)) AS genres
 FROM
     movie m
     LEFT JOIN file f ON m.poster_id = f.id
