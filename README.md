@@ -8,106 +8,117 @@ title: My Database erDiagram
 ---
     erDiagram
 
-    User {
+    user {
         uuid id PK
         varchar(20) username
-        varchar(20) firstName
-        varchar(20) secondName
+        varchar(20) first_name
+        varchar(20) second_name
         varchar(100) email
         varchar(20) password
-        uuid avatarId FK
-        uuid favourites FK
-        date createdAt
-        date updatedAt
+        date created_at
+        date updated_at
     }
 
-    User ||--o| Avatar : image
-    User ||--o| FavouriteMovies : array
-
-    Movie {
+    movie {
         uuid id PK
         varchar(100) title
         text(500) description
         money budget
-        date releaseDate
+        date release_date
         numeric duration
-        varchar(100) country
-        uuid posterId FK
+        uuid country_id FK
+        uuid poster_id FK
         varchar(50) producer
         varchar(150) genres
-        uuid[] characters FK
-        date createdAt
-        date updatedAt
+        date created_at
+        date updated_at
     }
 
-    Movie ||--o| File : poster
 
-    Person {
+    person {
         uuid id PK
-        varchar(20) firstName
-        varchar(20) lastName
-        text(700) biography
-        date birthDate
-        varchar(20) gender
-        varchar(50) birthCountry
-        uuid[] gallery FK
-        date createdAt
-        date updatedAt
+        varchar(20) first_name
+        varchar(20) last_name
+        text biography
+        date birth_date
+        enum gender
+        uuid country_id FK
+        uuid picture FK
+        date created_at
+        date updated_at
     }
 
-    Person ||--o| Gallery : photos
-    Person }|--|{ Movie : movieId
-    Character }|--|{ Movie : character
-    Character }|--o{ Person : data
+    person ||--o| gallery : photos
+    person }|--|{ movie : movieId
+    character }|--|{ movie : movieId
+    character }|--o{ person : isPerson
 
-    Gallery {
-        uuid id PK
-        uuid personId FK
-        uuid[] filesId FK
+    gallery {
+        uuid person_id FK
+        uuid file_id FK
     }
 
-    Character {
+    character {
         uuid id PK
         varchar(20) name
         varchar(150) description
-        varchar(20) role FK
-        uuid[] movies FK
-        date createdAt
-        date updatedAt
+        enum role
+        uuid movie_id FK
+        uuid person_id FK
+        date created_at
+        date updated_at
     }
 
-    FavouriteMovies {
+    avatar {
+        uuid user_id FK
+        uuid file_id FK
+    }
+
+    countries {
         uuid id PK
-        uuid usersId FK
-        uuid[] filmsList FK
+        numeric code FK
+        varchar name FK
     }
 
-    FavouriteMovies ||--o{ Movie : setOfFilms
-
-    Avatar {
-        uuid id PK
-        uuid[] fileId FK
-        uuid userId FK
-    }
-
-    Poster {
-        uuid id PK
-        uuid[] fileId FK
-        uuid movieId FK
-    }
-
-    File {
+    file {
         uuid id PK
         varchar(50) filename
-        varchar(50) mimeType
+        varchar(50) mime_type
         varchar(50) key
-        varchar(150) publicURL
+        varchar(150) public_url
+        date created_at
+        date updated_at
     }
 
-    Gallery ||--o{ File : imageData
-    Poster ||--o| File : imageData
-    Avatar ||--o| File : imageData
+    gallery ||--o{ file : images
+    avatar ||--o| file : picture
+    movie ||--o| file : poster
+
+
+    movie ||--|| countries : from
+    person ||--|| countries : from
 
 
 ```
 
+``` mermaid
+---
+title: additional tables
+---
+    erDiagram
+    movie_actors {
+        uuid person_id FK
+        uuid movie_id FK
+    }
+
+    movie_characters {
+        uuid character_id FK
+        uuid movie_id FK
+    }
+
+    favourite_movies {
+        uuid user_id FK
+        uuid movie_id FK
+    }
+
+```
