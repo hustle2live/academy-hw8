@@ -5,8 +5,6 @@
 -- Містить принаймні один з жанрів: Action або Drama.
 
 
-
-
 SELECT m.id, m.title, m.release_date, m.duration, m.description, json_build_object('poster_id', m.poster_id) AS poster, json_build_object('ID', p.id, 'FirstName', p.first_name, 'LastName', p.last_name) AS director
 FROM movie m
 LEFT JOIN person p ON m.producer ILIKE concat('%', p.first_name ,'%')
